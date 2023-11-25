@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/dist/output.css" rel="stylesheet">    
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="./logo.jpeg">
+  <link rel="manifest" href="./manifest.json">
+  <script>
+     if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("/sw.js")
+          .then(function (registration) {
+            console.log(
+              "Service worker terdaftar dengan skop: ",
+              registration.scope
+            );
+          })
+          .catch(function (error) {
+            console.log("Service worker gagal terdaftar: ", error);
+          });
+      } else {
+        console.log("Browser tidak mendukung service worker");
+      }
+   </script>
+</head>
+<body class="bg-gray-100 w-screen flex flex-col items-center p-4 gap-4">
+  <!-- Budget -->
+  <div class="flex flex-col w-full p-3 gap-3 bg-white rounded-lg">
+    <h1 class="text-lg font-bold">Budget</h1>
+    <input type="number" id="budget" class="border-2 border-gray-100 p-2 rounded" placeholder="Enter total amount">
+    <button onclick="hitungBudget()" class="bg-green-600 text-white rounded-lg p-2 font-bold">Set Budget</button>
+  </div>
+  
+  <!-- Expense -->
+  <div class="flex flex-col w-full p-3 gap-3 bg-white rounded-lg">
+    <h1 class="text-lg font-bold">Expenses</h1>
+    <input type="text" id="textExpense" class="border-2 border-gray-100 p-2 rounded" placeholder="Enter title of product">
+    <input type="number" id="costExpense" class="border-2 border-gray-100 p-2 rounded" placeholder="Enter cost of product">
+    <button onclick="hitungExpense()" class="bg-green-600 text-white rounded-lg p-2 font-bold">Check Amount</button>
+  </div>
+  <!-- Result -->
+  <div class="bg-green-600 flex w-full text-white justify-around rounded items-center py-5">
+    <!-- total budget -->
+    <div class="flex flex-col items-center">
+      <h1>Total Budget</h1>
+      <p id="totalBudget">0</p>
+    </div>
+    <!-- total expense -->
+    <div class="flex flex-col items-center">
+      <h1>Total Expense</h1>
+      <p id="totalExpense">0</p>
+    </div>
+    <!-- total amount -->
+    <div class="flex flex-col items-center">
+      <h1>Total Amount</h1>
+      <p id="totalAmount">0</p>
+    </div>
+  </div>
+  <!-- Expense List -->
+  <div class="bg-white w-full rounded flex flex-col p-3 gap-3">
+    <h1 class="text-lg font-bold">Expense List</h1>
+    <div id="list" class="flex flex-col gap-2"></div>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>
